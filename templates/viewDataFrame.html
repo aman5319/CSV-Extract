@@ -1,0 +1,33 @@
+{% extends "layout.html" %}
+{% block content %}
+    <button onclick="location.href='{{ url_for("root") }}'" type="button">
+        Back To Upload
+    </button>
+    <br/>
+    <br/>
+
+    {% include "dropdown.html" %}
+
+    <br/>
+    <form action="{{ url_for("download" , filename=currentfile) }}" method="post">
+        {{ dataframe }}
+        <input class="container" type="submit" value="Extract">
+    </form>
+    <h4> You need to select all the fields you want to extract. </h4>
+    {% if filelist|length > 2 %}
+        <h4> Hover on the top blue button to select other csv file. </h4>
+    {% endif %}
+    {% with messages = get_flashed_messages() %}
+        {% if messages %}
+            <ul class=flashes>
+                {% for message in messages %}
+                    <h3>{{ message }}</h3>
+                {% endfor %}
+            </ul>
+        {% endif %}
+    {% endwith %}
+    <br/>
+
+{% endblock %}
+
+

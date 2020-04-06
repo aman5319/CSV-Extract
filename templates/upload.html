@@ -1,0 +1,25 @@
+{% extends"layout.html" %}
+{% block content %}
+
+    <ol>
+        <h4>
+            <li>Select all the CSV files</li>
+            <li>Upload It</li>
+            <li>Extract It</li>
+            <li>Download It and Enjoy</li>
+        </h4>
+    </ol>
+    {% with messages = get_flashed_messages() %}
+        {% if messages %}
+            <ul class=flashes>
+                {% for message in messages %}
+                    <li>{{ message }}</li>
+                {% endfor %}
+            </ul>
+        {% endif %}
+    {% endwith %}
+    <form method="POST" enctype="multipart/form-data" action={{ url_for("upload_csv_file") }}>
+        <input type="file" name="file" accept="text/csv" multiple>
+        &emsp;&emsp;&emsp; <input type="submit" value="Upload" name="submit">
+    </form>
+{% endblock %}
